@@ -1,0 +1,10 @@
+---
+-
+  hosts: all
+  roles:
+    - role: zzet.common
+    - role: zzet.rbenv
+    - role: zzet.postgresql
+    - role: bennojoy.redis
+    - role: bennojoy.nginx
+    - role: sicoplace_app_setup

@@ -1,0 +1,20 @@
+---
+project_name: sicoplace
+project_user: sicoplace
+project_path: sicoplace
+project_port: 9000
+project_locale: 'UTF-8'
+project_repo: git@github.com:zzet/sicoplace.git
+project_uri: sicoplace.zzet.org
+
+postgresql:
+  version: 9.2
+  encoding: 'UTF-8'
+  locale: 'en_US.UTF-8'
+
+  user: sicoplace
+  password: mysupersecretpassword
+
+  production_name: sicoplace_production
+  development_name: sicoplace_development
+  test_name: sicoplace_test

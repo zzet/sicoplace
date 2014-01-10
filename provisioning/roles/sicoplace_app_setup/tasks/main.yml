@@ -1,0 +1,116 @@
+---
+- name: sicoplace_app_setup | Create user.
+  user: home=/rest/u/{{ project_user }} name={{ project_user }} state=present
+  sudo: yes
+
+- name: sicoplace_app_setup | Create the project directory.
+  file: state=directory path=/rest/u/{{ project_user }}/apps/{{ project_path }}
+  sudo: yes
+
+- name: sicoplace_app_setup | Update the project directory.
+  file: group={{ project_user }} owner={{ project_user }} mode=755 state=directory path=/rest/u/{{ project_user }}/apps/{{ project_path }}
+  sudo: yes
+
+- name: sicoplace_app_setup | Create the SSH directory.
+  file: state=directory path=/rest/u/{{ project_user }}/.ssh/ owner={{ project_user }} group={{ project_user }}
+
+- name: sicoplace_app_setup | Upload SSH authorized_keys.
+  copy: src=authorized_keys dest=/rest/u/{{ project_user }}/.ssh/authorized_keys owner={{ project_user }} group={{ project_user }} mode=0600
+
+- name: sicoplace_app_setup | Upload SSH known hosts.
+  copy: src=known_hosts dest=/rest/u/{{ project_user }}/.ssh/known_hosts mode=0600
+
+- name: sicoplace_app_setup | postgresql | ensure user does not have unnecessary privilege (prod)
+  postgresql_user: name={{ postgresql.user }} password={{ postgresql.password }} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  sudo_user: postgres
+  when: $vm == 0
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | postgresql | ensure production database is created
+  postgresql_db: name={{ postgresql.production_name }} owner={{ postgresql.user }}
+                 encoding={{ postgresql.encoding }} lc_collate={{ postgresql.locale }} lc_ctype={{ postgresql.locale }} template='template0'
+                 state=present
+  sudo_user: postgres
+  when: $vm == 0
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | postgresql | ensure user has access to production database
+  postgresql_user: db={{ postgresql.production_name }} name={{ postgresql.user }} password={{ postgresql.password }} priv=ALL
+  sudo_user: postgres
+  when: $vm == 0
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | postgresql | ensure user does not have unnecessary privilege (dev)
+  postgresql_user: name={{ postgresql.user }} password={{ postgresql.password }} role_attr_flags=NOSUPERUSER,CREATEDB
+  sudo_user: postgres
+  when: $vm == 1
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | postgresql | ensure dev databases is created
+  postgresql_db: name={{ postgresql.development_name }} owner={{ postgresql.user }}
+                 encoding={{ postgresql.encoding }} lc_collate={{ postgresql.locale }} lc_ctype={{ postgresql.locale }} template='template0'
+                 state=present
+  sudo_user: postgres
+  when: $vm == 1
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | postgresql | ensure user has access to dev databases
+  postgresql_user: db={{ postgresql.development_name }} name={{ postgresql.user }} password={{ postgresql.password }} priv=ALL
+  sudo_user: postgres
+  when: $vm == 1
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | postgresql | ensure test databases is created
+  postgresql_db: name={{ postgresql.test_name }} owner={{ postgresql.user }}
+                 encoding={{ postgresql.encoding }} lc_collate={{ postgresql.locale }} lc_ctype={{ postgresql.locale }} template='template0'
+                 state=present
+  sudo_user: postgres
+  when: $vm == 1
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | postgresql | ensure user has access to test databases
+  postgresql_user: db={{ postgresql.test_name }} name={{ postgresql.user }} password={{ postgresql.password }} priv=ALL
+  sudo_user: postgres
+  when: $vm == 1
+  tags:
+    - postgres
+
+- name: sicoplace_app_setup | nginx | update nginx config
+  template: src=nginx.site.conf.j2 dest=/etc/nginx/sites-available/{{ project_name }} mode=0755
+  sudo: true
+  when: $vm == 0
+
+- name: sicoplace_app_setup | nginx | enable app
+  file: src=/etc/nginx/sites-available/{{ project_name }} dest=/etc/nginx/sites-enabled/{{ project_name }} state=link
+  when: $vm == 0
+
+- name: sicoplace_app_setup | runit | add service directory
+  file: state=directory path=/etc/sv/{{ project_name }}-web-puma
+  sudo: true
+  when: $vm == 0
+
+- name: sicoplace_app_setup | runit | add service log directory
+  file: state=directory path=/etc/sv/{{ project_name }}-web-puma/log
+  sudo: true
+  when: $vm == 0
+
+- name: sicoplace_app_setup | runit | add run script
+  template: src=runit.site.run.j2 dest=/etc/sv/{{ project_name }}-web-puma/run
+  sudo: true
+  when: $vm == 0
+
+- name: sicoplace_app_setup | runit | add run log script
+  template: src=runit.site.log_run.j2 dest=/etc/sv/{{ project_name }}-web-puma/log/run
+  sudo: true
+  when: $vm == 0
+
+- name: sicoplace_app_setup | runit | symlink dirs to enable runit service
+  file: state=link src=/etc/sv/{{ project_name }}-web-puma dest=/etc/service/{{ project_name }}-web-puma
+  when: $vm == 0

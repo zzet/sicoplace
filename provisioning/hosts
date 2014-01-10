@@ -1,0 +1,9 @@
+[sicoplace_servers:children]
+sicoplace_vm
+sicoplace_production
+
+[sicoplace_vm]
+192.168.111.111 nickname=local branch=develop vm=1 user=vagrant
+
+[sicoplace_production]
+176.9.30.8 nickname=production branch=master vm=0 user=root
