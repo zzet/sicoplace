@@ -1,5 +1,5 @@
 ---
-vm = 1
+vm: 1
 user: vagrant
 
 projects_directory: /rest/u/apps
@@ -8,3 +8,6 @@ rbenv:
   env: user
   version: v0.4.0
   ruby_version: 2.0.0-p247
+
+users:
+  - { name: sicoplace, comment: "Sicoplace User", home: /rest/u/sicoplace, groups: "sicoplace" }

@@ -13,12 +13,18 @@
 
 - name: sicoplace_app_setup | Create the SSH directory.
   file: state=directory path=/rest/u/{{ project_user }}/.ssh/ owner={{ project_user }} group={{ project_user }}
+  sudo: true
+  sudo_user: "{{ project_user }}"
 
 - name: sicoplace_app_setup | Upload SSH authorized_keys.
   copy: src=authorized_keys dest=/rest/u/{{ project_user }}/.ssh/authorized_keys owner={{ project_user }} group={{ project_user }} mode=0600
+  sudo: true
+  sudo_user: "{{ project_user }}"
 
 - name: sicoplace_app_setup | Upload SSH known hosts.
   copy: src=known_hosts dest=/rest/u/{{ project_user }}/.ssh/known_hosts mode=0600
+  sudo: true
+  sudo_user: "{{ project_user }}"
 
 - name: sicoplace_app_setup | postgresql | ensure user does not have unnecessary privilege (prod)
   postgresql_user: name={{ postgresql.user }} password={{ postgresql.password }} role_attr_flags=NOSUPERUSER,NOCREATEDB
