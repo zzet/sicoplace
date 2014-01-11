@@ -12,6 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require react
+//= require showdown
+//= require ./Comment
+//= require ./CommentList
+//= require ./CommentForm
+//= require ./CommentBox
+//= require ./comments
 //= require_tree .

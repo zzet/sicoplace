@@ -2,9 +2,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
+gem 'puma'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -14,16 +15,19 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+gem 'haml-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'react-rails', '~> 0.8.0.0'
+gem 'showdown-rails'
+gem "twitter-bootstrap-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -44,3 +48,38 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'configus'
+gem 'minitest-rails'
+
+group :test do
+  gem 'coveralls', require: false
+  gem 'simplecov', :require => false
+  # gem 'ruby-prof'
+  gem "rake"
+  gem 'ci_reporter'
+  gem 'mocha', require: false
+  gem 'spring'
+  gem "spring-commands-testunit", require: false
+
+  gem 'tconsole'
+  gem 'launchy'
+end
+
+group :development do
+  # gem 'meta_request'
+  gem 'vendorer'
+  gem 'unicorn'
+  gem 'quiet_assets'
+  gem 'pre-commit'
+  gem 'pry-rails'
+  gem 'capistrano', '~> 2.5.x'
+  gem 'capistrano-ext'
+  gem 'capistrano-rbenv'
+  #gem 'capistrano-bundler'
+  gem 'rvm-capistrano'
+  gem 'annotate'
+  # gem 'bullet'
+end
+
+
