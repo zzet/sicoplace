@@ -40,7 +40,7 @@ var CommentForm = React.createClass({
   render: function() {
     if (this.state.text != "" && this.state.author != "") {
       preview = (
-        <div className="comment-preview">
+        <div className="scp comment-preview">
           <h4>Preview your comment</h4>
           <Comment author={this.state.author} created_at={this.state.created_at}> {this.state.text} </Comment>
         </div>
@@ -52,24 +52,24 @@ var CommentForm = React.createClass({
 
     return (
       <div>
-        <form className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label for="author" className="col-sm-2 control-label">Your name</label>
-            <div className="col-sm-10">
-              <input className="form-control" type="text" placeholder="Your name" ref="author" onChange={this.handlePreview} id="author" />
+        <form className="scp form-horizontal" role="form" onSubmit={this.handleSubmit}>
+          <div className="scp form-group">
+            <label for="author" className="scp col-sm-2 control-label">Your name</label>
+            <div className="scp col-sm-10">
+              <input className="scp form-control" type="text" placeholder="Your name" ref="author" onChange={this.handlePreview} id="author" />
             </div>
           </div>
 
-          <div className="form-group">
-            <label for="message" className="col-sm-2 control-label">Message</label>
-            <div className="col-sm-10">
-              <textarea className="form-control" placeholder="Say something..." ref="text" onChange={this.handlePreview} id="message"/>
+          <div className="scp form-group">
+            <label for="message" className="scp col-sm-2 control-label">Message</label>
+            <div className="scp col-sm-10">
+              <textarea className="scp form-control" placeholder="Say something..." ref="text" onChange={this.handlePreview} id="message"/>
             </div>
           </div>
 
-          <div className="form-group">
-            <div className="col-sm-offset-2 col-sm-10">
-              <button className="btn btn-default" type="submit">Post</button>
+          <div className="scp form-group">
+            <div className="scp col-sm-offset-2 col-sm-10">
+              <button className="scp btn btn-default" type="submit">Post</button>
             </div>
           </div>
         </form>

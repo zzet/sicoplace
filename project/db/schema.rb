@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111134806) do
+ActiveRecord::Schema.define(version: 20140112114315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(version: 20140111134806) do
     t.string   "email"
     t.integer  "parent_id"
     t.integer  "resource_id"
+    t.integer  "author_id"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resource_uris", force: true do |t|
+    t.integer  "resource_id"
+    t.string   "domain"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resources", force: true do |t|
+    t.string   "name"
+    t.integer  "owner_id"
+    t.string   "state"
+    t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

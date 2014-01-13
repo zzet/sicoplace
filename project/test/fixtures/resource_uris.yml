@@ -1,0 +1,12 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  resource_id: 1
+  domain: MyString
+  state: MyString
+
+two:
+  resource_id: 1
+  domain: MyString
+  state: MyString

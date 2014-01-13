@@ -1,4 +1,5 @@
 /** @jsx React.DOM */
+
 var CommentBox = React.createClass({
   getInitialState: function() {
     return {data: []};
@@ -39,7 +40,7 @@ var CommentBox = React.createClass({
 
   render: function() {
     return (
-      <div className="commentBox">
+      <div className="scp commentBox">
         <h1>Comments</h1>
         <CommentList data={this.state.data} />
         <CommentForm onCommentSubmit={this.handleCommentSubmit} />

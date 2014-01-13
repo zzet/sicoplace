@@ -9,15 +9,15 @@ var CommentList = React.createClass({
     ];
     var commentNodes = this.props.data.map(function (comment) {
       return (
-        <li className="media">
+        <li className="scp media">
           <Comment author={comment.author} created_at={comment.created_at}>{comment.text}</Comment>
         </li>
       );
     });
 
     return (
-      <div className="commentList">
-        <ul className="media-list">
+      <div className="scp commentList">
+        <ul className="scp media-list">
           {commentNodes}
         </ul>
       </div>

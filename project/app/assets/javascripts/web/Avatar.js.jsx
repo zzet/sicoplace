@@ -7,8 +7,8 @@ var Avatar = React.createClass({
     var avatarLink = "#";
 
     return (
-      <a className="pull-left" href={avatarLink}>
-        <img className="media-object" src={avatarSrc} alt={avatarAlt} />
+      <a className="scp pull-left" href={avatarLink}>
+        <img className="scp media-object" src={avatarSrc} alt={avatarAlt} />
       </a>
     );
   }

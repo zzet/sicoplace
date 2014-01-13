@@ -14,9 +14,15 @@
 //= require jquery_ujs
 //= require react
 //= require showdown
+//= require jquery.dom-outline-1.0
+//= require bootstrap-modal
+//= require bootstrap-modalmanager
 //= require ./Comment
 //= require ./CommentList
 //= require ./CommentForm
 //= require ./CommentBox
+//= require ./BootstrapButton
+//= require ./BootstrapModal
+//= require ./Example
 //= require ./comments
 //= require_tree .

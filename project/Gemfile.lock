@@ -31,6 +31,8 @@ GEM
       rake (>= 0.8.7)
     arel (4.0.1)
     atomic (1.1.14)
+    bootstrap-modal-rails (2.2.0)
+      railties (>= 3.1)
     builder (3.1.4)
     capistrano (2.15.5)
       highline
@@ -215,6 +217,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bootstrap-modal-rails
   capistrano (~> 2.5.x)
   capistrano-ext
   capistrano-rbenv
