@@ -21,8 +21,9 @@
 //= require ./CommentList
 //= require ./CommentForm
 //= require ./CommentBox
-//= require ./BootstrapButton
-//= require ./BootstrapModal
-//= require ./Example
+// = require ./BootstrapButton
+// = require ./BootstrapModal
+// = require ./Example
+//= require ./NewModal
 //= require ./comments
 //= require_tree .

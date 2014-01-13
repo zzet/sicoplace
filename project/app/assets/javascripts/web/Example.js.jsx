@@ -10,20 +10,17 @@ var Example = React.createClass({
     var modal = null;
     modal = (
       <BootstrapModal
-      ref="modal"
-      confirm="OK"
-      cancel="Cancel"
-      onCancel={this.handleCancel}
-      onConfirm={this.closeModal}
-      title="Hello, Bootstrap!">
-      This is a React component powered by jQuery and Bootstrap!
+        ref="modal"
+        confirm="OK"
+        cancel="Cancel"
+        onCancel={this.handleCancel}
+        onConfirm={this.closeModal}
+        title="Write comment">
+          <CommentForm onSubmit={ function(){} } />
       </BootstrapModal>
     );
     return (
-      <div className="example">
-      {modal}
-      <BootstrapButton onClick={this.openModal}>Open modal</BootstrapButton>
-      </div>
+      modal
     );
   },
   openModal: function() {

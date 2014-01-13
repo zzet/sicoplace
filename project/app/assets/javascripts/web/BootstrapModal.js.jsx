@@ -5,8 +5,7 @@ var BootstrapModal = React.createClass({
   // integrate with Bootstrap or jQuery!
   componentDidMount: function() {
     // When the component is added, turn it into a modal
-    $(this.getDOMNode())
-    .modal({backdrop: 'static', keyboard: false, show: false})
+    $(this.getDOMNode()).modal({backdrop: false, keyboard: false, show: false})
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).off('hidden', this.handleHidden);
@@ -24,38 +23,38 @@ var BootstrapModal = React.createClass({
     if (this.props.confirm) {
       confirmButton = (
         <BootstrapButton
-        onClick={this.handleConfirm}
-        className="btn-primary">
-        {this.props.confirm}
+          onClick={this.handleConfirm}
+          className="btn-primary">
+          {this.props.confirm}
         </BootstrapButton>
       );
     }
     if (this.props.cancel) {
       cancelButton = (
         <BootstrapButton onClick={this.handleCancel}>
-        {this.props.cancel}
+          {this.props.cancel}
         </BootstrapButton>
       );
     }
 
     return (
       <div className="modal hide fade">
-      <div className="modal-header">
-      <button
-      type="button"
-      className="close"
-      onClick={this.handleCancel}
-      dangerouslySetInnerHTML={{__html: '&times'}}
-      />
-      <h3>{this.props.title}</h3>
-      </div>
-      <div className="modal-body">
-      {this.props.children}
-      </div>
-      <div className="modal-footer">
-      {cancelButton}
-      {confirmButton}
-      </div>
+        <div className="modal-header">
+          <button
+            type="button"
+            className="close"
+            onClick={this.handleCancel}
+            dangerouslySetInnerHTML={{__html: '&times'}}
+          />
+          <h3>{this.props.title}</h3>
+        </div>
+        <div className="modal-body">
+          {this.props.children}
+        </div>
+        <div className="modal-footer">
+          {cancelButton}
+          {confirmButton}
+        </div>
       </div>
     );
   },
